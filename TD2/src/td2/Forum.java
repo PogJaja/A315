@@ -1,19 +1,20 @@
 package td2;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Forum extends MemberManager {
-	
+
 	private String nom;
-	private HashMap <String, Canal> channels = new HashMap<String, Canal>();
-	
+	private HashMap <String, Channel> channels = new HashMap<String, Channel>();
+
 	public Forum (String nom) {
-		
+
 		this.nom = nom;
-		Canal c0 = new Canal ("defaut");
-		channels.put("defaut", c0);
+		channels.put("defaut", new Channel ("defaut"));
 	}
-	
+
 
 	public String getNom() {
 		return nom;
@@ -22,14 +23,42 @@ public class Forum extends MemberManager {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	public void addChannel (Canal c) {
-		
-		channels.put(c.getNom(), c);
+
+	public boolean addChannel (String nom) {
+
+		if (channels.containsKey(nom))
+			return false;
+
+		channels.put(nom, new Channel (nom));
+		return true;
 	}
-	
-	public HashMap<String, Canal> getChannels () {
-		
-		return channels;
+
+	public boolean addChannelOfBriefs (String nom, int taille) {
+
+		if (channels.containsKey(nom))
+			return false;
+
+		channels.put(nom, new Channel (nom, taille));
+		return true;
 	}
+
+	public Collection<Channel> getChannels () {
+
+		return channels.values();	
+	}
+
+	public Channel getChannel (String nom) {
+
+		if (!channels.containsKey(nom))
+			return null;
+
+		return channels.get(nom);
+	}
+
+	public Set <String> getChannelNames () {
+
+		return channels.keySet();
+	}
+
+
 }

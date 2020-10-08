@@ -62,6 +62,13 @@ public class Message {
 	public void setTaille(int taille) {
 		this.taille = taille;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Message [contents=" + contents + ", auteur=" + auteur + "]";
+	}
+	
 	
 	
 	

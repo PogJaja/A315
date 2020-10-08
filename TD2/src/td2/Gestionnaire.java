@@ -7,9 +7,15 @@ public class Gestionnaire {
 	
 	private HashMap <String, Forum> forums; 
 	
-	public Gestionnaire() {}
+	public Gestionnaire() {
+		
+		forums = new HashMap <String, Forum> ();
+	}
 	
 	public Forum creerForum (String nom) {
+		
+		if (forums.containsKey(nom))
+			return null;
 		
 		Forum f = new Forum (nom);
 		forums.put(nom, f);

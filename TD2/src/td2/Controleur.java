@@ -6,13 +6,6 @@ import static java.lang.Thread.sleep;
 import java.io.IOException;
 import java.util.Set;
 
-import fr.uca.iut.info.coo.td1_2.core.Member;
-import fr.uca.iut.info.coo.td2.core.Channel;
-import fr.uca.iut.info.coo.td2.core.Forum;
-import fr.uca.iut.info.coo.td2.core.Gestionnaire;
-import fr.uca.iut.info.coo.td2.core.Message;
-import fr.uca.iut.info.util.Memory;
-
 public class Controleur {
 
 	private Gestionnaire registre = new Gestionnaire();
@@ -94,11 +87,10 @@ public class Controleur {
 	private void creerForum() {
 		//Récupérer la liste des noms des forums
 		Set<String> ensembleDesNomsDeForumsExistants = registre.getNomForums();
-		String nomDuForum = 
-				ui.getNomDuForum(ensembleDesNomsDeForumsExistants);
+		String nomDuForum = ui.getNomDuForum(ensembleDesNomsDeForumsExistants);
 		Forum forumNouveau = registre.creerForum(nomDuForum);
 		if (forumNouveau != null)
-			ui.afficher("Forum " + nomDuForum + ":"+ forumNouveau);
+			ui.afficher("Forum " + nomDuForum + ":"+ forumNouveau);		// Le forum créé est considéré comme nul ???
 		else
 			ui.afficher("Pbme de creation Forum " + nomDuForum);
 	}
@@ -139,7 +131,7 @@ public class Controleur {
 		String msg =  ui.getValeur("saisir le message : ");
 
 		Message message = new Message(msg,currentMember );
-		
+
 		if(nomDeCanal.equals("*")){
 			for(Channel c : forum.getChannels()){
 				c.addMessage(message);
